@@ -45,7 +45,7 @@ public class UserDAO {
      */
     public UserDTO login(ServletContext ctx, String seq, String password) {
         seq = seq.trim().toUpperCase();
-        String sql = "SELECT TRIM(SEQ) AS SEQ, PASSWORD, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE TRIM(SEQ) = ?";
+        String sql = "SELECT TRIM(SEQ) AS SEQ, PASSWORD, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE SEQ = ?";
 
         try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.REPLICA);
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -80,7 +80,7 @@ public class UserDAO {
      */
     public UserDTO findBySeq(ServletContext ctx, String seq) {
         seq = seq.trim().toUpperCase();
-        String sql = "SELECT TRIM(SEQ) AS SEQ, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE TRIM(SEQ) = ?";
+        String sql = "SELECT TRIM(SEQ) AS SEQ, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE SEQ = ?";
 
         try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.REPLICA);
              PreparedStatement ps = con.prepareStatement(sql)) {

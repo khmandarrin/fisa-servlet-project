@@ -2,6 +2,7 @@ package dev.smartconsumer.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,8 +38,8 @@ public class ApiServlet extends HttpServlet {
 
         UserDTO user = (UserDTO) session.getAttribute(Const.SESSION_USER);
 
-        List<StatDTO> myStats = analysisDAO.getMyTopConsumption(getServletContext(), user.getSeq());
         List<StatDTO> myAllStats = analysisDAO.getMyAllConsumption(getServletContext(), user.getSeq());
+        List<StatDTO> myStats = myAllStats.size() > 3 ? new ArrayList<>(myAllStats.subList(0, 3)) : myAllStats;
         List<StatDTO> peerStats = analysisDAO.getPeerStats(getServletContext(), user.getAge(), user.getSexCd());
 
         // 수동 JSON 빌드

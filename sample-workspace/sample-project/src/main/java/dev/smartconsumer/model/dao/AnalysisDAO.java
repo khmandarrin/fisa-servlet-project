@@ -41,7 +41,7 @@ public class AnalysisDAO {
             if (i > 0) sb.append(", ");
             sb.append("SUM(").append(Const.CATEGORIES[i][0]).append(") AS ").append(Const.CATEGORIES[i][0]);
         }
-        sb.append(" FROM EDU_DATA_F_2 WHERE TRIM(SEQ) = ?");
+        sb.append(" FROM EDU_DATA_F_2 WHERE SEQ = ?");
 
         try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.REPLICA);
              PreparedStatement ps = con.prepareStatement(sb.toString())) {

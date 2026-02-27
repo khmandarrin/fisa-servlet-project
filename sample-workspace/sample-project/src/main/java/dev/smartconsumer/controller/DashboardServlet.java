@@ -1,6 +1,7 @@
 package dev.smartconsumer.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,11 +38,11 @@ public class DashboardServlet extends HttpServlet {
         log.info("Dashboard request for SEQ: {}", user.getSeq());
 
         // 2. 데이터 조회
-        // A. 나의 Top 3 소비
-        List<StatDTO> myStats = analysisDAO.getMyTopConsumption(getServletContext(), user.getSeq());
-
-        // B. 나의 전체 카테고리별 소비 (원형 차트용)
+        // A. 나의 전체 카테고리별 소비 (원형 차트용) — 한 번만 조회
         List<StatDTO> myAllStats = analysisDAO.getMyAllConsumption(getServletContext(), user.getSeq());
+
+        // B. 나의 Top 3 소비 (myAllStats에서 추출 → DB 재조회 없음)
+        List<StatDTO> myStats = myAllStats.size() > 3 ? new ArrayList<>(myAllStats.subList(0, 3)) : myAllStats;
 
         // C. 또래 평균 소비 (연령대 + 성별)
         List<StatDTO> peerStats = analysisDAO.getPeerStats(getServletContext(), user.getAge(), user.getSexCd());

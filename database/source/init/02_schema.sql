@@ -40,6 +40,9 @@ CREATE TABLE EDU_DATA_F_2 (
     PRIMARY KEY (BAS_YH, SEQ)
 );
 
+-- SEQ 단독 조회 최적화를 위한 인덱스 (PK는 BAS_YH, SEQ 순서라 SEQ 단독 검색 시 사용 불가)
+CREATE INDEX idx_edu_seq ON EDU_DATA_F_2 (SEQ);
+
 -- ============================================================
 -- 2. USER_INFO: 고객 테이블
 -- ============================================================
