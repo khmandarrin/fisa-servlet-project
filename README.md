@@ -1,6 +1,8 @@
 # 소비 리포트 : 내 소비는 평균일까? 💳
 
 > 나의 소비 패턴을 동일 연령대 · 성별 그룹과 비교해보는 웹 서비스
+<img width="1470" height="832" alt="스크린샷 2026-03-01 오후 4 04 09" src="https://github.com/user-attachments/assets/8e0b988f-9b52-4073-a8ac-ed1802c75f52" />
+<img width="1470" height="832" alt="스크린샷 2026-03-01 오후 4 03 57" src="https://github.com/user-attachments/assets/3ca19f92-aedc-4d33-8e7e-3ed2991d84c5" />
 
 ---
 
@@ -50,8 +52,6 @@
 ### 🔓 로그아웃
 
 - 세션 무효화 (invalidate)
-- `SESSION_INFO` 테이블에서 세션 정보 삭제
-- 완전한 로그아웃 처리
 
 ---
 
@@ -76,7 +76,7 @@
         ▼
 ┌─────────────────────┐
 │       Nginx         │  ← Presentation 계층 (정적 리소스, 트래픽 제어)
-│  (SPOF 이슈 존재)   │    향후 Active-Standby 이중화 예정
+│  (SPOF 이슈 존재)     │    향후 Active-Standby 이중화 예정
 └──────────┬──────────┘
      부하분산 (ip_hash)
     ┌───────┴────────┐
