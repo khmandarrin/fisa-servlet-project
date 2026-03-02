@@ -2,6 +2,7 @@
 
 > 나의 소비 패턴을 동일 연령대 · 성별 그룹과 비교해보는 웹 서비스
 <img width="1470" height="832" alt="스크린샷 2026-03-01 오후 4 04 09" src="https://github.com/user-attachments/assets/8e0b988f-9b52-4073-a8ac-ed1802c75f52" />
+<img width="1470" height="829" alt="스크린샷 2026-03-02 오후 11 49 59" src="https://github.com/user-attachments/assets/375c888a-6bca-4cda-96e1-166fcd6299b3" />
 
 
 ---
