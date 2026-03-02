@@ -26,7 +26,7 @@ public class ApplicationContextListener implements ServletContextListener {
 
             // 1. Source DB (Write) 설정 - 3308 포트
             HikariConfig sourceConfig = new HikariConfig();
-            sourceConfig.setJdbcUrl("jdbc:mysql://localhost:3308/card_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true");
+            sourceConfig.setJdbcUrl("jdbc:mysql://localhost:55758/card_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true");
             sourceConfig.setUsername("root"); // 실제 계정으로 변경
             sourceConfig.setPassword("1234");
             sourceConfig.setMaximumPoolSize(5); // Write는 상대적으로 적음
@@ -34,7 +34,7 @@ public class ApplicationContextListener implements ServletContextListener {
             
             // 2. Replica DB (Read) 설정 - 3309 포트
             HikariConfig replicaConfig = new HikariConfig();
-            replicaConfig.setJdbcUrl("jdbc:mysql://localhost:3309/card_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true");
+            replicaConfig.setJdbcUrl("jdbc:mysql://localhost:55759/card_db?serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true");
             replicaConfig.setUsername("root");
             replicaConfig.setPassword("1234");
             replicaConfig.setMaximumPoolSize(15); // Read가 많으므로 넉넉하게

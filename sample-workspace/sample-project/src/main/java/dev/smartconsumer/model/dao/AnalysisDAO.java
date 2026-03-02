@@ -52,7 +52,7 @@ public class AnalysisDAO {
                 long grandTotal = 0;
                 if (rs.next()) {
                     for (String[] cat : Const.CATEGORIES) {
-                        long amount = rs.getLong(cat[0]);
+                        long amount = rs.getLong(cat[0]) * 1000; // 1000원단위;
                         if (amount > 0) {
                             list.add(StatDTO.builder()
                                     .categoryName(cat[1]) // 한글명
@@ -97,7 +97,7 @@ public class AnalysisDAO {
                 long grandTotal = 0;
                 if (rs.next()) {
                     for (int i = 0; i < Const.CATEGORIES.length; i++) {
-                        long amount = rs.getLong(Const.AVG_COLUMNS[i]);
+                        long amount = rs.getLong(Const.AVG_COLUMNS[i]) * 1000;
                         if (amount > 0) {
                             list.add(StatDTO.builder()
                                     .categoryName(Const.CATEGORIES[i][1]) // 한글명
