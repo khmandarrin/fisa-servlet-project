@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://xmlns.jcp.io/xml/ns/javaee"
-         xsi:schemaLocation="http://xmlns.jcp.io/xml/ns/javaee http://xmlns.jcp.io/xml/ns/javaee/web-app_4_0.xsd"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          id="WebApp_ID" version="4.0">
 
   <display-name>Smart Consumer</display-name>
+
+  <!-- Tomcat Clustering: 이 앱이 세션 복제를 지원함을 선언 -->
+  <distributable/>
 
   <!-- Character Encoding Filter -->
   <filter>
