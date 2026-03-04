@@ -4,25 +4,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.servlet.ServletContext;
+import javax.sql.DataSource;
 
-import dev.smartconsumer.common.DBUtil;
 import dev.smartconsumer.model.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class UserDAO {
 
+    private final DataSource sourceDs;
+    private final DataSource replicaDs;
+
+    // 생성자 주입
+    public UserDAO(DataSource sourceDs, DataSource replicaDs) {
+        this.sourceDs = sourceDs;
+        this.replicaDs = replicaDs;
+    }
+
     /**
      * 회원가입 - Source DB (Write)
-     * SEQ, PASSWORD, SEX_CD, AGE를 직접 받아서 USER_INFO에 INSERT
      */
-    public boolean signup(ServletContext ctx, String seq, String password, String sexCd, String age) {
+    public boolean signup(String seq, String password, String sexCd, String age) {
         seq = seq.trim().toUpperCase();
-
         String insertSql = "INSERT INTO USER_INFO (SEQ, PASSWORD, SEX_CD, AGE) VALUES (?, ?, ?, ?)";
 
-        try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.SOURCE);
+        // sourceDs.getConnection() 사용
+        try (Connection con = sourceDs.getConnection();
              PreparedStatement ps = con.prepareStatement(insertSql)) {
 
             ps.setString(1, seq);
@@ -43,11 +50,12 @@ public class UserDAO {
     /**
      * 로그인 - Replica DB (Read)
      */
-    public UserDTO login(ServletContext ctx, String seq, String password) {
+    public UserDTO login(String seq, String password) {
         seq = seq.trim().toUpperCase();
         String sql = "SELECT TRIM(SEQ) AS SEQ, PASSWORD, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE SEQ = ?";
 
-        try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.REPLICA);
+        // replicaDs.getConnection() 사용
+        try (Connection con = replicaDs.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, seq);
@@ -78,11 +86,12 @@ public class UserDAO {
     /**
      * 고객번호로 조회 - Replica DB (Read)
      */
-    public UserDTO findBySeq(ServletContext ctx, String seq) {
+    public UserDTO findBySeq(String seq) {
         seq = seq.trim().toUpperCase();
         String sql = "SELECT TRIM(SEQ) AS SEQ, TRIM(SEX_CD) AS SEX_CD, TRIM(AGE) AS AGE FROM USER_INFO WHERE SEQ = ?";
 
-        try (Connection con = DBUtil.getConnection(ctx, DBUtil.DBType.REPLICA);
+        // replicaDs.getConnection() 사용
+        try (Connection con = replicaDs.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, seq);

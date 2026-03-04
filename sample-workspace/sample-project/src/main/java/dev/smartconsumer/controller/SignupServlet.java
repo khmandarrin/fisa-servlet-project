@@ -14,7 +14,13 @@ import java.io.IOException;
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
 
-    private final UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO;
+
+    @Override
+    public void init() throws ServletException {
+        // ServletContext에서 UserDAO Bean 가져오기
+        this.userDAO = (UserDAO) getServletContext().getAttribute("userDAO");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +38,8 @@ public class SignupServlet extends HttpServlet {
 
         log.info("Signup attempt: SEQ={}, SEX_CD={}, AGE={}", seq, sexCd, age);
 
-        boolean success = userDAO.signup(getServletContext(), seq, password, sexCd, age);
+        // getServletContext() 파라미터 제거
+        boolean success = userDAO.signup(seq, password, sexCd, age);
 
         if (success) {
             log.info("Signup success → redirecting to login: {}", seq);
