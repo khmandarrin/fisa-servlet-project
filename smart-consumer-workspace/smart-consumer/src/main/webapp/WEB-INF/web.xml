@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         id="WebApp_ID" version="4.0">
+
+  <display-name>Smart Consumer</display-name>
+
+  <!-- Tomcat Clustering: 이 앱이 세션 복제를 지원함을 선언 -->
+  <distributable/>
+
+  <!-- Spring ApplicationContext 설정 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- Character Encoding Filter -->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>dev.smartconsumer.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- Welcome File -->
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- Session Timeout (minutes) -->
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+</web-app>

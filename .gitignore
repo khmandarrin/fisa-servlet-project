@@ -2,7 +2,8 @@
 *.class
 
 ### Build ###
-sample-workspace/sample-project/build/
+smart-consumer-workspace/smart-consumer/build/
+smart-consumer-workspace/smart-consumer/target/
 
 ### Eclipse / IDE ###
 .metadata/
@@ -13,11 +14,8 @@ sample-workspace/sample-project/build/
 bin/
 
 ### Servers & Local Config ###
-sample-workspace/Servers/
-
-### Libraries ###
-#*.jar
+smart-consumer-workspace/Servers/
 
 ### OS ###
 .DS_Store
-Thumbs.dbb
+Thumbs.db

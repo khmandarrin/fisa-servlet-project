@@ -86,7 +86,7 @@ http {
 sudo systemctl status nginx
 
 # 접속 테스트 (브라우저에서도 가능)
-curl -I http://localhost/sample-project/login
+curl -I http://localhost/smart-consumer/login
 ```
 
 정상 응답 시 `HTTP/1.1 200 OK` 또는 `302 Found` 가 반환됩니다.

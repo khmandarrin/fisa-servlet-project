@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 컴포넌트 스캔: @Repository, @Service, @Component 등 자동 등록 -->
+    <context:component-scan base-package="dev.smartconsumer" />
+
+    <!-- ==================== -->
+    <!-- DataSource 빈 정의     -->
+    <!-- ==================== -->
+
+    <!-- Source DB (Write) - 3308 포트 -->
+    <bean id="sourceDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3308/card_db?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="root" />
+        <property name="password" value="1234" />
+        <property name="maximumPoolSize" value="5" />
+        <property name="poolName" value="Hikari-Source-Pool" />
+    </bean>
+
+    <!-- Replica DB (Read) - 3309 포트 -->
+    <bean id="replicaDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3309/card_db?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;allowPublicKeyRetrieval=true" />
+        <property name="username" value="root" />
+        <property name="password" value="1234" />
+        <property name="maximumPoolSize" value="15" />
+        <property name="poolName" value="Hikari-Replica-Pool" />
+    </bean>
+
+</beans>
